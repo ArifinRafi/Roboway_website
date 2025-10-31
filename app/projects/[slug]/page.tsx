@@ -65,8 +65,8 @@ export default async function ProjectPage({ params }: Params) {
             <p className="mt-2 text-sm text-zinc-400">Discover the core innovations that make {project.title} a leader.</p>
           </div>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {(project.features ?? project.tags.map((t) => ({ title: t, description: "" }))).map((f) => {
-              const Icon = (Icons as any)[f.icon as keyof typeof Icons] ?? Icons.Sparkles;
+            {(project.features ?? project.tags.map((t) => ({ title: t, description: "", icon: undefined }))).map((f) => {
+              const Icon = (f.icon ? (Icons as any)[f.icon as keyof typeof Icons] : null) ?? Icons.Sparkles;
               return (
                 <div
                   key={f.title}
