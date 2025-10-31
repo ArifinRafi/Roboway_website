@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <rect width="800" height="500" fill="#0b0f19"/>
+  <rect x="40" y="40" width="720" height="420" rx="16" fill="#1e293b" stroke="rgba(255,255,255,0.08)"/>
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#60a5fa" font-size="28" font-family="Inter, system-ui, Arial">Underwater ROV — Placeholder</text>
+</svg>
+
+
