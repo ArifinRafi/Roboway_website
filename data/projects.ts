@@ -19,7 +19,7 @@ export type Project = {
   specsHardware?: { label: string; value: string }[];
   specsSoftware?: { label: string; value: string }[];
   useCases?: { title: string; description: string; icon?: string }[];
-  actionGallery?: string[];
+  actionGallery?: { title: string; image: string }[];
   upgrades?: { title: string; description: string; icon?: string }[];
 };
 
@@ -30,7 +30,7 @@ export const projects: Project[] = [
     subtitle: "Humanoid robot",
     description:
       "Next‑generation humanoid with facial and speech recognition, onboard CNN‑based vision, expressive interaction, and safe control.",
-    coverImage: "/images/pixi-humanoid.svg",
+    coverImage: "/images/shark_tank_team.jpg",
     gallery: [
       "/images/pixi-humanoid.svg",
       "/images/underwater-rov.svg",
@@ -42,14 +42,26 @@ export const projects: Project[] = [
     ],
     team: [
       {
-        name: "A. Rahman",
+        name: "Md Arifin Ahmed Rafi",
         role: "Robotics Engineer",
         image: "/images/avatar-1.svg",
         socials: { linkedin: "#", github: "#" },
       },
       {
-        name: "S. Akter",
-        role: "AI Researcher",
+        name: "Ratul Hasan",
+        role: "3D and Mechanical Designer",
+        image: "/images/avatar-2.svg",
+        socials: { linkedin: "#" },
+      },
+      {
+        name: "Sihab Sahariar",
+        role: "Robotics Engineer",
+        image: "/images/avatar-2.svg",
+        socials: { linkedin: "#" },
+      },
+      {
+        name: "Md. Mahabub Ul Haque",
+        role: "Electrical and Electronics Engineer",
         image: "/images/avatar-2.svg",
         socials: { linkedin: "#" },
       },
@@ -83,9 +95,9 @@ export const projects: Project[] = [
       { title: "Educational Support", description: "Interactive lessons demonstrating robotics and AI concepts.", icon: "GraduationCap" },
     ],
     actionGallery: [
-      "/images/pixi-humanoid.svg",
-      "/images/underwater-rov.svg",
-      "/images/autonomous-rc.svg",
+      { title: "", image: "/images/pixi_handshake.jpg" },
+      { title: "", image: "/images/487807483_2925078901036614_949228799301634419_n.jpg" },
+      { title: "", image: "/images/pixi1.jpg" },
     ],
     upgrades: [
       { title: "Enhanced Dexterity", description: "Advanced manipulators for delicate handling and fine tasks.", icon: "Hand" },
@@ -93,12 +105,12 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "autonomous-rc-car",
-    title: "Autonomous RC Car",
+    slug: "auv-autonomous-underwater-vehicle",
+    title: "AUV - Autonomous Underwater Vehicle",
     subtitle: "YOLO‑based perception",
     description:
       "Autonomous path following with traffic sign detection using YOLO and embedded compute.",
-    coverImage: "/images/autonomous-rc.svg",
+    coverImage: "/images/underwater_1.jpg",
     gallery: [
       "/images/autonomous-rc.svg",
       "/images/pixi-humanoid.svg",

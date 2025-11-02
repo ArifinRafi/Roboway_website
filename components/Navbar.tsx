@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Bot, Menu, X } from "lucide-react";
 
@@ -48,7 +49,8 @@ export function Navbar() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center gap-2" onClick={close}>
           <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-[#3b82f6]/20 text-[#3b82f6]">
-            <Bot size={20} />
+            
+            <Image src="/images/logo.png" alt="Roboway Technologies" width={32} height={32} />
           </span>
           <span className="text-sm font-semibold tracking-wide text-zinc-200">
             Roboway Technologies

@@ -93,9 +93,9 @@ export default function Contact() {
         <div className="rounded-xl border border-white/10 bg-white/5 p-6">
           <h3 className="text-base font-semibold text-white">Contact Info</h3>
           <p className="mt-3 text-sm text-zinc-300">
-            Email: contact@roboway.example.com
+            Email: teamroboway@gmail.com
             <br />
-            Phone: +1 (000) 000-0000
+            Phone: +8801611240524
           </p>
           <div className="mt-4 text-sm text-zinc-400">
             We respond within 1–2 business days.

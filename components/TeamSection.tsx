@@ -31,19 +31,43 @@ export default function TeamSection() {
               </div>
               <div className="ml-auto flex items-center gap-3 text-zinc-400">
                 {m.socials?.linkedin ? (
-                  <a onClick={(e) => e.stopPropagation()} href={m.socials.linkedin} aria-label="LinkedIn" className="hover:text-white">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      e.preventDefault();
+                      window.open(m.socials.linkedin, '_blank', 'noopener,noreferrer');
+                    }}
+                    aria-label="LinkedIn"
+                    className="hover:text-white"
+                  >
                     <FaLinkedin />
-                  </a>
+                  </button>
                 ) : null}
                 {m.socials?.github ? (
-                  <a onClick={(e) => e.stopPropagation()} href={m.socials.github} aria-label="GitHub" className="hover:text-white">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      e.preventDefault();
+                      window.open(m.socials.github, '_blank', 'noopener,noreferrer');
+                    }}
+                    aria-label="GitHub"
+                    className="hover:text-white"
+                  >
                     <FaGithub />
-                  </a>
+                  </button>
                 ) : null}
                 {m.socials?.twitter ? (
-                  <a onClick={(e) => e.stopPropagation()} href={m.socials.twitter} aria-label="Twitter/X" className="hover:text-white">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      e.preventDefault();
+                      window.open(m.socials.twitter, '_blank', 'noopener,noreferrer');
+                    }}
+                    aria-label="Twitter/X"
+                    className="hover:text-white"
+                  >
                     <FaXTwitter />
-                  </a>
+                  </button>
                 ) : null}
               </div>
             </div>

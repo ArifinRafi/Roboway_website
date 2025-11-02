@@ -36,7 +36,7 @@ export default async function ProjectPage({ params }: Params) {
         {/* Hero with background image */}
         <section className="relative isolate">
           <div className="absolute inset-0 -z-10">
-            <Image src={project.coverImage} alt={project.title} fill className="object-cover opacity-40" />
+            <Image src={'/images/489677440_2929367410607763_2228031053113354937_n.jpg'} alt={project.title} fill className="object-cover opacity-40" />
             <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/90" />
           </div>
           <div className="mx-auto max-w-5xl px-6 py-16 text-center">
@@ -139,10 +139,18 @@ export default async function ProjectPage({ params }: Params) {
             <h2 className="text-2xl font-semibold text-white">{project.title.split(" ")[0]} in Action</h2>
             <p className="mt-2 text-sm text-zinc-400">A closer look in real‑world scenarios.</p>
           </div>
-          <div className="mt-6 grid gap-4 sm:grid-cols-3">
-            {(project.actionGallery ?? project.gallery ?? []).slice(0, 3).map((src) => (
-              <div key={src} className="relative aspect-[16/9] overflow-hidden rounded-xl border border-white/10 bg-white/5">
-                <Image src={src} alt="action" fill className="object-cover" />
+          <div className="mt-6 grid gap-6 sm:grid-cols-3">
+            {(project.actionGallery && project.actionGallery.length > 0
+              ? project.actionGallery
+              : (project.gallery ?? []).slice(0, 3).map((src) => ({ title: "", image: src }))
+            ).map((item, index) => (
+              <div key={index} className="group">
+                <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-white/10 bg-white/5 transition hover:border-[#3b82f6]/40">
+                  <Image src={item.image} alt={item.title || "action"} fill className="object-cover" />
+                </div>
+                {item.title ? (
+                  <h3 className="mt-3 text-center text-sm font-semibold text-white">{item.title}</h3>
+                ) : null}
               </div>
             ))}
           </div>
