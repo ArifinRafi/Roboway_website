@@ -35,7 +35,9 @@ export default function TeamSection() {
                     onClick={(e) => {
                       e.stopPropagation();
                       e.preventDefault();
-                      window.open(m.socials.linkedin, '_blank', 'noopener,noreferrer');
+                      if (m.socials?.linkedin) {
+                        window.open(m.socials.linkedin, '_blank', 'noopener,noreferrer');
+                      }
                     }}
                     aria-label="LinkedIn"
                     className="hover:text-white"
@@ -48,7 +50,9 @@ export default function TeamSection() {
                     onClick={(e) => {
                       e.stopPropagation();
                       e.preventDefault();
-                      window.open(m.socials.github, '_blank', 'noopener,noreferrer');
+                      if (m.socials?.github) {
+                        window.open(m.socials.github, '_blank', 'noopener,noreferrer');
+                      }
                     }}
                     aria-label="GitHub"
                     className="hover:text-white"
@@ -61,7 +65,9 @@ export default function TeamSection() {
                     onClick={(e) => {
                       e.stopPropagation();
                       e.preventDefault();
-                      window.open(m.socials.twitter, '_blank', 'noopener,noreferrer');
+                      if (m.socials?.twitter) {
+                        window.open(m.socials.twitter, '_blank', 'noopener,noreferrer');
+                      }
                     }}
                     aria-label="Twitter/X"
                     className="hover:text-white"
