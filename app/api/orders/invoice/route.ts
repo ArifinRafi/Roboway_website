@@ -68,7 +68,8 @@ export async function GET(req: NextRequest) {
     }
 
     const pdfBuffer = await buildInvoicePdf(order);
-    return new NextResponse(pdfBuffer, {
+    const pdfBytes = new Uint8Array(pdfBuffer);
+    return new NextResponse(pdfBytes, {
       headers: {
         "Content-Type": "application/pdf",
         "Content-Disposition": `inline; filename="invoice-${orderId}.pdf"`,
