@@ -8,6 +8,7 @@ import { Bot, Menu, X } from "lucide-react";
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/innovations", label: "Our Innovation" },
+  { href: "/3d-printing", label: "3D Printing" },
   { href: "/#about", label: "About" },
   { href: "/#services", label: "Services" },
   { href: "/#team", label: "Team" },
@@ -15,11 +16,17 @@ const navItems = [
   { href: "/#research", label: "Research" },
   { href: "/careers", label: "Careers" },
   { href: "/#contact", label: "Contact" },
+  { href: "/workshops", label: "Workshops" },
+];
+
+const defaultWorkshops = [
+  { title: "Satellite Workshop", href: "/satellite-workshop" },
 ];
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [workshops, setWorkshops] = useState(defaultWorkshops);
 
   useEffect(() => {
     const handler = () => setIsScrolled(window.scrollY > 8);
@@ -34,6 +41,27 @@ export function Navbar() {
     window.addEventListener("resize", closeOnResize);
     return () => window.removeEventListener("resize", closeOnResize);
   }, [open]);
+
+  useEffect(() => {
+    const loadWorkshops = async () => {
+      try {
+        const res = await fetch("/api/workshops");
+        if (!res.ok) return;
+        const data = await res.json();
+        if (Array.isArray(data.workshops) && data.workshops.length > 0) {
+          setWorkshops(
+            data.workshops.map((w: { title: string; slug: string }) => ({
+              title: w.title,
+              href: `/workshops/${w.slug}`,
+            }))
+          );
+        }
+      } catch {
+        // Keep fallback
+      }
+    };
+    loadWorkshops();
+  }, []);
 
   const toggle = () => setOpen((v) => !v);
   const close = () => setOpen(false);
@@ -58,7 +86,7 @@ export function Navbar() {
         </Link>
 
         {/* Desktop */}
-        <div className="hidden gap-6 md:flex">
+        <div className="hidden items-center gap-6 md:flex">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -97,6 +125,28 @@ export function Navbar() {
                     {item.label}
                   </Link>
                 ))}
+                <Link
+                  href="/workshops"
+                  onClick={close}
+                  className="block rounded-md px-3 py-2 text-sm text-zinc-300 hover:bg-white/5 hover:text-white"
+                >
+                  Workshops
+                </Link>
+                <div className="border-t border-white/10 pt-2">
+                  <div className="px-3 py-1 text-xs uppercase tracking-wide text-zinc-500">
+                    Workshop Options
+                  </div>
+                  {workshops.map((w) => (
+                    <Link
+                      key={w.href}
+                      href={w.href}
+                      onClick={close}
+                      className="block rounded-md px-3 py-2 text-sm text-zinc-300 hover:bg-white/5 hover:text-white"
+                    >
+                      {w.title}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

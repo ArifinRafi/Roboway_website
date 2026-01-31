@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { jobs } from "@/data/jobs";
+import connectDB from "@/lib/mongodb";
+import Career from "@/models/Career";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -12,14 +14,14 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
-  const job = jobs.find((j) => j.slug === slug);
+  const job = await getJobBySlug(slug);
   if (!job) return {};
   return { title: `${job.title} | Careers | Roboway` };
 }
 
 export default async function JobDetail({ params }: Params) {
   const { slug } = await params;
-  const job = jobs.find((j) => j.slug === slug);
+  const job = await getJobBySlug(slug);
   if (!job) return notFound();
 
   return (
@@ -71,6 +73,17 @@ export default async function JobDetail({ params }: Params) {
       <Footer />
     </div>
   );
+}
+
+async function getJobBySlug(slug: string) {
+  const fallback = jobs.find((j) => j.slug === slug);
+  try {
+    await connectDB();
+    const job = await Career.findOne({ slug }).lean();
+    return job || fallback;
+  } catch {
+    return fallback;
+  }
 }
 
 

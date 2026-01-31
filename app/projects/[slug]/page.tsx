@@ -7,6 +7,8 @@ import TeamGrid from "@/components/TeamGrid";
 import { projects } from "@/data/projects";
 import Image from "next/image";
 import * as Icons from "lucide-react";
+import connectDB from "@/lib/mongodb";
+import Innovation from "@/models/Innovation";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -16,7 +18,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
-  const project = projects.find((p) => p.slug === slug);
+  const project = await getProjectBySlug(slug);
   if (!project) return {};
   return {
     title: `${project.title} | Roboway Projects`,
@@ -26,8 +28,11 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
 export default async function ProjectPage({ params }: Params) {
   const { slug } = await params;
-  const project = projects.find((p) => p.slug === slug);
+  const project = await getProjectBySlug(slug);
   if (!project) return notFound();
+
+  const videoEmbed = getYouTubeEmbedUrl(project.videoUrl);
+  const heroImage = project.coverImage || project.gallery?.[0] || "/window.svg";
 
   return (
     <div className="min-h-dvh">
@@ -36,7 +41,7 @@ export default async function ProjectPage({ params }: Params) {
         {/* Hero with background image */}
         <section className="relative isolate">
           <div className="absolute inset-0 -z-10">
-            <Image src={'/images/489677440_2929367410607763_2228031053113354937_n.jpg'} alt={project.title} fill className="object-cover opacity-40" />
+            <Image src={heroImage} alt={project.title} fill className="object-cover opacity-40" />
             <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/90" />
           </div>
           <div className="mx-auto max-w-5xl px-6 py-16 text-center">
@@ -117,6 +122,28 @@ export default async function ProjectPage({ params }: Params) {
           </div>
         </section>
 
+        {videoEmbed ? (
+          <section className="mx-auto max-w-7xl px-6 py-10">
+            <div className="text-center">
+              <h2 className="text-2xl font-semibold text-white">Project Video</h2>
+              <p className="mt-2 text-sm text-zinc-400">
+                Watch a short highlight of this innovation.
+              </p>
+            </div>
+            <div className="mt-6 overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+              <div className="relative w-full pt-[56.25%]">
+                <iframe
+                  className="absolute inset-0 h-full w-full"
+                  src={videoEmbed}
+                  title={`${project.title} video`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+          </section>
+        ) : null}
+
         {/* Use Cases */}
         <section className="mx-auto max-w-7xl px-6 py-10">
           <div className="text-center">
@@ -134,27 +161,36 @@ export default async function ProjectPage({ params }: Params) {
         </section>
 
         {/* Pixi in Action / Gallery */}
-        <section className="mx-auto max-w-7xl px-6 py-6">
-          <div className="text-center">
-            <h2 className="text-2xl font-semibold text-white">{project.title.split(" ")[0]} in Action</h2>
-            <p className="mt-2 text-sm text-zinc-400">A closer look in real‑world scenarios.</p>
-          </div>
-          <div className="mt-6 grid gap-6 sm:grid-cols-3">
-            {(project.actionGallery && project.actionGallery.length > 0
+        {(() => {
+          const rawGallery =
+            project.actionGallery && project.actionGallery.length > 0
               ? project.actionGallery
-              : (project.gallery ?? []).slice(0, 3).map((src) => ({ title: "", image: src }))
-            ).map((item, index) => (
-              <div key={index} className="group">
-                <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-white/10 bg-white/5 transition hover:border-[#3b82f6]/40">
-                  <Image src={item.image} alt={item.title || "action"} fill className="object-cover" />
-                </div>
-                {item.title ? (
-                  <h3 className="mt-3 text-center text-sm font-semibold text-white">{item.title}</h3>
-                ) : null}
+              : (project.gallery ?? []).slice(0, 3).map((src) => ({ title: "", image: src }));
+          const actionGallery = rawGallery.filter((item) => Boolean(item.image));
+
+          if (actionGallery.length === 0) return null;
+
+          return (
+            <section className="mx-auto max-w-7xl px-6 py-6">
+              <div className="text-center">
+                <h2 className="text-2xl font-semibold text-white">{project.title.split(" ")[0]} in Action</h2>
+                <p className="mt-2 text-sm text-zinc-400">A closer look in real‑world scenarios.</p>
               </div>
-            ))}
-          </div>
-        </section>
+              <div className="mt-6 grid gap-6 sm:grid-cols-3">
+                {actionGallery.map((item, index) => (
+                  <div key={index} className="group">
+                    <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-white/10 bg-white/5 transition hover:border-[#3b82f6]/40">
+                      <Image src={item.image} alt={item.title || "action"} fill className="object-cover" />
+                    </div>
+                    {item.title ? (
+                      <h3 className="mt-3 text-center text-sm font-semibold text-white">{item.title}</h3>
+                    ) : null}
+                  </div>
+                ))}
+              </div>
+            </section>
+          );
+        })()}
 
         {/* Future Upgrades */}
         <section className="mx-auto max-w-7xl px-6 py-10">
@@ -196,6 +232,34 @@ export default async function ProjectPage({ params }: Params) {
       <Footer />
     </div>
   );
+}
+
+async function getProjectBySlug(slug: string) {
+  const fallback = projects.find((p) => p.slug === slug);
+  try {
+    await connectDB();
+    const project = await Innovation.findOne({ slug }).lean();
+    return project || fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+function getYouTubeEmbedUrl(url?: string) {
+  if (!url) return null;
+  try {
+    const parsed = new URL(url);
+    if (parsed.hostname.includes("youtu.be")) {
+      return `https://www.youtube.com/embed/${parsed.pathname.replace("/", "")}`;
+    }
+    if (parsed.hostname.includes("youtube.com")) {
+      const id = parsed.searchParams.get("v");
+      if (id) return `https://www.youtube.com/embed/${id}`;
+    }
+  } catch {
+    return null;
+  }
+  return null;
 }
 
 

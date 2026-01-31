@@ -9,13 +9,23 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.980.0",
+    "@aws-sdk/s3-request-presigner": "^3.980.0",
     "@emailjs/browser": "^4.4.1",
+    "archiver": "^7.0.1",
     "framer-motion": "^12.23.24",
+    "jspdf": "^4.0.0",
+    "jspdf-autotable": "^5.0.7",
     "lucide-react": "^0.548.0",
+    "mongoose": "^9.1.5",
     "next": "16.0.1",
+    "pdfkit": "^0.17.2",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "react-icons": "^5.5.0"
+    "react-icons": "^5.5.0",
+    "stl-parser": "^0.11.1",
+    "three-stl-loader": "^1.0.6",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

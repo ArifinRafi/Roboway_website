@@ -2,8 +2,24 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import { jobs } from "@/data/jobs";
+import connectDB from "@/lib/mongodb";
+import Career from "@/models/Career";
 
-export default function Careers() {
+async function getCareers() {
+  try {
+    await connectDB();
+    const careers = await Career.find({}).sort({ createdAt: -1 }).lean();
+    if (careers.length > 0) {
+      return careers;
+    }
+  } catch {
+    // Fallback to static data
+  }
+  return jobs;
+}
+
+export default async function Careers() {
+  const careers = await getCareers();
   return (
     <div className="min-h-dvh">
       <Navbar />
@@ -30,7 +46,7 @@ export default function Careers() {
             <p className="mt-2 text-sm text-zinc-400">We hire across robotics, AI, and embedded systems.</p>
           </div>
           <div className="mt-8 grid gap-6 md:grid-cols-2">
-            {jobs.map((job) => (
+            {careers.map((job) => (
               <Link
                 key={job.slug}
                 href={`/careers/${job.slug}`}

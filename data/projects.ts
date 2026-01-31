@@ -10,6 +10,7 @@ export type Project = {
   title: string;
   subtitle?: string;
   description: string;
+  videoUrl?: string;
   coverImage: string; // path in public/
   gallery?: string[];
   techDetails?: string[]; // bullet points
