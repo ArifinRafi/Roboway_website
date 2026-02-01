@@ -22,7 +22,7 @@ export default function LandingSections() {
     initial: reduceMotion ? "visible" : "hidden",
     whileInView: "visible",
     viewport: { once: true, amount: 0.2 },
-    transition: { duration: 0.6, ease: "easeOut" },
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
     variants: sectionVariants,
   };
 
@@ -31,25 +31,46 @@ export default function LandingSections() {
       <motion.section {...sharedProps}>
         <Hero />
       </motion.section>
-      <motion.section {...sharedProps} transition={{ duration: 0.6, ease: "easeOut", delay: 0.05 }}>
+      <motion.section
+        {...sharedProps}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
+      >
         <About />
       </motion.section>
-      <motion.section {...sharedProps} transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}>
+      <motion.section
+        {...sharedProps}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+      >
         <Services />
       </motion.section>
-      <motion.section {...sharedProps} transition={{ duration: 0.6, ease: "easeOut", delay: 0.12 }}>
+      <motion.section
+        {...sharedProps}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.12 }}
+      >
         <Projects />
       </motion.section>
-      <motion.section {...sharedProps} transition={{ duration: 0.6, ease: "easeOut", delay: 0.14 }}>
+      <motion.section
+        {...sharedProps}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.14 }}
+      >
         <TeamSection />
       </motion.section>
-      <motion.section {...sharedProps} transition={{ duration: 0.6, ease: "easeOut", delay: 0.16 }}>
+      <motion.section
+        {...sharedProps}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.16 }}
+      >
         <Research />
       </motion.section>
-      <motion.section {...sharedProps} transition={{ duration: 0.6, ease: "easeOut", delay: 0.18 }}>
+      <motion.section
+        {...sharedProps}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.18 }}
+      >
         <Join />
       </motion.section>
-      <motion.section {...sharedProps} transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}>
+      <motion.section
+        {...sharedProps}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+      >
         <Contact />
       </motion.section>
     </>
