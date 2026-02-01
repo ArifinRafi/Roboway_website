@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProjectGallery from "@/components/ProjectGallery";
 import TeamGrid from "@/components/TeamGrid";
+import QuoteRequest from "@/components/QuoteRequest";
 import { projects } from "@/data/projects";
 import Image from "next/image";
 import * as Icons from "lucide-react";
@@ -58,7 +59,12 @@ export default async function ProjectPage({ params }: Params) {
               ))}
             </div>
             <div className="mt-6">
-              <a href="#features" className="rounded-full bg-[#3b82f6] px-5 py-2 text-sm font-semibold text-white">Discover {project.title.split(" ")[0]}'s Capabilities</a>
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <a href="#features" className="rounded-full bg-[#3b82f6] px-5 py-2 text-sm font-semibold text-white">
+                  Discover {project.title.split(" ")[0]}'s Capabilities
+                </a>
+                <QuoteRequest projectSlug={project.slug} projectTitle={project.title} />
+              </div>
             </div>
           </div>
         </section>
@@ -67,7 +73,7 @@ export default async function ProjectPage({ params }: Params) {
         <section id="features" className="mx-auto max-w-7xl px-6 py-12">
           <div className="text-center">
             <h2 className="text-2xl font-semibold text-white">Key Features</h2>
-            <p className="mt-2 text-sm text-zinc-400">Discover the core innovations that make {project.title} a leader.</p>
+            <p className="mt-2 text-sm text-zinc-400">Discover the core products that make {project.title} a leader.</p>
           </div>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {(project.features ?? project.tags.map((t) => ({ title: t, description: "", icon: undefined }))).map((f) => {
@@ -192,22 +198,6 @@ export default async function ProjectPage({ params }: Params) {
           );
         })()}
 
-        {/* Future Upgrades */}
-        <section className="mx-auto max-w-7xl px-6 py-10">
-          <div className="text-center">
-            <h2 className="text-2xl font-semibold text-white">Future Upgrades</h2>
-            <p className="mt-2 text-sm text-zinc-400">Our commitment to continuous innovation.</p>
-          </div>
-          <div className="mt-8 grid gap-6 md:grid-cols-2">
-            {(project.upgrades ?? []).map((u) => (
-              <div key={u.title} className="rounded-xl border border-white/10 bg-[#2b2f36] p-5">
-                <h3 className="text-sm font-semibold text-white">{u.title}</h3>
-                <p className="mt-2 text-xs text-zinc-300">{u.description}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
         {/* Team (keep same) */}
         <section className="mx-auto max-w-7xl px-6 pb-10">
           <h2 className="text-lg font-semibold text-white">Team</h2>
@@ -216,16 +206,24 @@ export default async function ProjectPage({ params }: Params) {
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="mx-auto max-w-7xl px-6 pb-16">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-8 text-center">
-            <h3 className="text-base font-semibold text-white">Ready to Experience the Future?</h3>
-            <p className="mx-auto mt-2 max-w-2xl text-sm text-zinc-300">
-              Contact us to learn more about {project.title} and how it can benefit your organization or home.
-            </p>
-            <a href="/#contact" className="mt-4 inline-block rounded-full bg-[#3b82f6] px-5 py-2 text-sm font-semibold text-white">
-              Get in Touch
-            </a>
+        {/* Quotation CTA */}
+        <section className="mx-auto max-w-6xl px-4 pb-24 sm:px-6 lg:px-8">
+          <div className="relative w-full overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-[#0b1220] via-[#0f172a] to-[#111827] p-10 text-center sm:p-12 md:p-14 lg:p-16">
+            <div
+              className="absolute inset-0 opacity-30"
+              style={{ backgroundImage: "radial-gradient(circle at top, #3b82f6, transparent 60%)" }}
+            />
+            <div className="relative">
+              <h3 className="text-2xl font-semibold text-white sm:text-3xl">
+                Need a Quotation for {project.title}?
+              </h3>
+              <p className="mx-auto mt-3 max-w-2xl text-sm text-zinc-300 sm:text-base">
+                Share your requirements and we’ll prepare a tailored proposal for your team.
+              </p>
+              <div className="mt-6 flex justify-center">
+                <QuoteRequest projectSlug={project.slug} projectTitle={project.title} />
+              </div>
+            </div>
           </div>
         </section>
       </main>

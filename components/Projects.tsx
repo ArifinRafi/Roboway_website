@@ -3,7 +3,7 @@ import { projects } from "@/data/projects";
 export default function Projects() {
   return (
     <section id="projects" className="mx-auto max-w-7xl px-6 py-20">
-      <h2 className="text-2xl font-semibold text-white">Innovations & Projects</h2>
+      <h2 className="text-2xl font-semibold text-white">Products & Projects</h2>
       <div className="mt-8 grid gap-6 sm:grid-cols-2">
         {projects.map((p) => (
           <article

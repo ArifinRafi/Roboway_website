@@ -7,13 +7,9 @@ import { Bot, Menu, X } from "lucide-react";
 
 const navItems = [
   { href: "/", label: "Home" },
-  { href: "/innovations", label: "Our Innovation" },
+  { href: "/innovations", label: "Products" },
   { href: "/3d-printing", label: "3D Printing" },
   { href: "/#about", label: "About" },
-  { href: "/#services", label: "Services" },
-  { href: "/#team", label: "Team" },
-  { href: "/#projects", label: "Projects" },
-  { href: "/#research", label: "Research" },
   { href: "/careers", label: "Careers" },
   { href: "/#contact", label: "Contact" },
   { href: "/workshops", label: "Workshops" },
@@ -78,7 +74,7 @@ export function Navbar() {
         <Link href="/" className="flex items-center gap-2" onClick={close}>
           <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-[#3b82f6]/20 text-[#3b82f6]">
             
-            <Image src="/images/logo.png" alt="Roboway Technologies" width={32} height={32} />
+            <Image src="/images/roboway-og.png" alt="Roboway Technologies" width={32} height={32} />
           </span>
           <span className="text-sm font-semibold tracking-wide text-zinc-200">
             Roboway Technologies

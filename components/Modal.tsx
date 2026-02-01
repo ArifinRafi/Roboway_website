@@ -1,6 +1,7 @@
 "use client";
 
 import { X } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 
 type ModalProps = {
   isOpen: boolean;
@@ -10,20 +11,34 @@ type ModalProps = {
 };
 
 export default function Modal({ isOpen, onClose, title, children }: ModalProps) {
-  if (!isOpen) return null;
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-      <div className="relative w-full max-w-lg rounded-2xl border border-white/10 bg-[#0f1620] p-6 shadow-2xl">
-        <button
-          onClick={onClose}
-          className="absolute right-4 top-4 rounded-lg p-2 text-zinc-400 transition hover:bg-white/10 hover:text-white"
+    <AnimatePresence>
+      {isOpen ? (
+        <motion.div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
         >
-          <X size={20} />
-        </button>
-        <h3 className="text-lg font-semibold text-white">{title}</h3>
-        <div className="mt-4 text-sm text-zinc-300">{children}</div>
-      </div>
-    </div>
+          <motion.div
+            className="relative w-full max-w-lg rounded-2xl border border-white/10 bg-[#0f1620] p-6 shadow-2xl"
+            initial={{ opacity: 0, y: 16, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 16, scale: 0.98 }}
+            transition={{ duration: 0.2 }}
+          >
+            <button
+              onClick={onClose}
+              className="absolute right-4 top-4 rounded-lg p-2 text-zinc-400 transition hover:bg-white/10 hover:text-white"
+            >
+              <X size={20} />
+            </button>
+            <h3 className="text-lg font-semibold text-white">{title}</h3>
+            <div className="mt-4 text-sm text-zinc-300">{children}</div>
+          </motion.div>
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
   );
 }

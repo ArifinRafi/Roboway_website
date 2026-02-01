@@ -17,7 +17,7 @@ export default function AdminDashboard() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-          <p className="mt-2 text-sm text-zinc-400">Manage orders, innovations, and careers.</p>
+          <p className="mt-2 text-sm text-zinc-400">Manage orders, products, quotations, team, and careers.</p>
         </div>
         <button
           onClick={handleLogout}
@@ -27,7 +27,7 @@ export default function AdminDashboard() {
         </button>
       </div>
 
-      <div className="mt-8 grid gap-6 md:grid-cols-4">
+      <div className="mt-8 grid gap-6 md:grid-cols-6">
         <Link
           href="/admin/orders"
           className="rounded-2xl border border-white/10 bg-[#0f1620] p-6 transition hover:border-[#3b82f6]/40"
@@ -39,8 +39,15 @@ export default function AdminDashboard() {
           href="/admin/innovations"
           className="rounded-2xl border border-white/10 bg-[#0f1620] p-6 transition hover:border-[#3b82f6]/40"
         >
-          <h2 className="text-lg font-semibold text-white">Innovations</h2>
+          <h2 className="text-lg font-semibold text-white">Products</h2>
           <p className="mt-2 text-sm text-zinc-400">Add and update innovation projects.</p>
+        </Link>
+        <Link
+          href="/admin/quotations"
+          className="rounded-2xl border border-white/10 bg-[#0f1620] p-6 transition hover:border-[#3b82f6]/40"
+        >
+          <h2 className="text-lg font-semibold text-white">Quotations</h2>
+          <p className="mt-2 text-sm text-zinc-400">Review product quotation requests.</p>
         </Link>
         <Link
           href="/admin/careers"
@@ -48,6 +55,13 @@ export default function AdminDashboard() {
         >
           <h2 className="text-lg font-semibold text-white">Careers</h2>
           <p className="mt-2 text-sm text-zinc-400">Post and manage engineering roles.</p>
+        </Link>
+        <Link
+          href="/admin/team"
+          className="rounded-2xl border border-white/10 bg-[#0f1620] p-6 transition hover:border-[#3b82f6]/40"
+        >
+          <h2 className="text-lg font-semibold text-white">Team</h2>
+          <p className="mt-2 text-sm text-zinc-400">Upload and manage team profiles.</p>
         </Link>
         <Link
           href="/admin/workshops/satellite"

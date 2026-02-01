@@ -53,7 +53,7 @@ export default function InvoicePage() {
     let isMounted = true;
     const loadLogo = async () => {
       try {
-        const res = await fetch("/images/logo.png");
+        const res = await fetch("/images/roboway-og.png");
         if (!res.ok) return;
         const blob = await res.blob();
         const reader = new FileReader();
@@ -151,7 +151,7 @@ export default function InvoicePage() {
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div className="flex items-center gap-4">
                 <div className="h-12 w-12 rounded-xl bg-white/5 p-2">
-                  <img src="/images/logo.png" alt="Roboway Technologies" className="h-full w-full object-contain" />
+                  <img src="/images/roboway-og.png" alt="Roboway Technologies" className="h-full w-full object-contain" />
                 </div>
                 <div>
                   <h1 className="text-2xl font-semibold">Invoice</h1>

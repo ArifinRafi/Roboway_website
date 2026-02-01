@@ -112,10 +112,10 @@ export default function AdminInnovationsPage() {
       try {
         const res = await fetch("/api/admin/innovations");
         const data = await res.json();
-        if (!res.ok) throw new Error(data.error || "Failed to load innovations");
+        if (!res.ok) throw new Error(data.error || "Failed to load products");
         setItems(data.innovations || []);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to load innovations");
+        setError(err instanceof Error ? err.message : "Failed to load products");
       } finally {
         setLoading(false);
       }
@@ -227,10 +227,10 @@ export default function AdminInnovationsPage() {
       if (!res.ok) throw new Error(data.error || "Failed to save innovation");
 
       if (editingId) {
-        setSuccess("Innovation updated successfully.");
+        setSuccess("Product updated successfully.");
         setItems((prev) => prev.map((item) => (item._id === editingId ? data.innovation : item)));
       } else {
-        setSuccess("Innovation added successfully.");
+        setSuccess("Product added successfully.");
         setItems((prev) => [data.innovation, ...prev]);
       }
       setEditingId(null);
@@ -318,7 +318,7 @@ export default function AdminInnovationsPage() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Failed to delete innovation");
       setItems((prev) => prev.filter((x) => x._id !== item._id));
-      setSuccess("Innovation deleted successfully.");
+      setSuccess("Product deleted successfully.");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to delete innovation");
     }
@@ -329,7 +329,7 @@ export default function AdminInnovationsPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-12">
-      <h1 className="text-2xl font-bold">Manage Innovations</h1>
+      <h1 className="text-2xl font-bold">Manage Products</h1>
       <p className="mt-2 text-sm text-zinc-400">Add new innovation projects and content.</p>
 
       {error && (
@@ -440,7 +440,7 @@ export default function AdminInnovationsPage() {
 
         <div className="flex flex-wrap gap-2">
           <button type="submit" className="rounded-lg bg-[#3b82f6] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#2563eb]">
-            {editingId ? "Update Innovation" : "Add Innovation"}
+            {editingId ? "Update Product" : "Add Product"}
           </button>
           {editingId && (
             <button
@@ -455,7 +455,7 @@ export default function AdminInnovationsPage() {
       </form>
 
       <div className="mt-10">
-        <h2 className="text-lg font-semibold">Existing Innovations</h2>
+        <h2 className="text-lg font-semibold">Existing Products</h2>
         {loading ? (
           <div className="mt-4 text-sm text-zinc-400">Loading...</div>
         ) : (

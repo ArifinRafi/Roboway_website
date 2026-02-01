@@ -8,7 +8,13 @@ export default function Footer() {
         <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
           <p className="text-sm text-zinc-400">© {new Date().getFullYear()} Roboway Technologies</p>
           <div className="flex items-center gap-5">
-            <Link href="#" className="text-zinc-400 hover:text-white" aria-label="LinkedIn">
+            <Link
+              href="https://www.linkedin.com/company/robowaylabs"
+              className="text-zinc-400 hover:text-white"
+              aria-label="LinkedIn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaLinkedin size={18} />
             </Link>
             <Link href="#" className="text-zinc-400 hover:text-white" aria-label="GitHub">

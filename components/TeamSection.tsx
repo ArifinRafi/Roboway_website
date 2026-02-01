@@ -2,10 +2,30 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
-import { team } from "@/data/team";
+import { team as fallbackTeam } from "@/data/team";
+
+type TeamMember = typeof fallbackTeam[number];
 
 export default function TeamSection() {
+  const [items, setItems] = useState<TeamMember[]>(fallbackTeam);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await fetch("/api/team");
+        const data = await res.json();
+        if (res.ok && Array.isArray(data.team) && data.team.length > 0) {
+          setItems(data.team);
+        }
+      } catch {
+        // fallback
+      }
+    };
+    load();
+  }, []);
+
   return (
     <section id="team" className="mx-auto max-w-7xl px-6 py-20">
       <div className="text-center">
@@ -15,7 +35,7 @@ export default function TeamSection() {
         </p>
       </div>
       <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {team.map((m) => (
+        {items.map((m) => (
           <Link
             key={m.slug}
             href={`/team/${m.slug}`}
@@ -23,7 +43,7 @@ export default function TeamSection() {
           >
             <div className="flex items-center gap-4">
               <div className="relative h-16 w-16 overflow-hidden rounded-xl border border-white/10 bg-white/10">
-                <Image src={m.image} alt={m.name} fill className="object-cover" />
+                <Image src={m.image || "/window.svg"} alt={m.name} fill className="object-cover" />
               </div>
               <div>
                 <div className="text-sm font-semibold text-white">{m.name}</div>

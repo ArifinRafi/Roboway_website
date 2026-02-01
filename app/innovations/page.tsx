@@ -31,7 +31,7 @@ export default function Innovations() {
       <main className="pt-20">
         <section className="max-w-6xl mx-auto text-center px-6 pt-8 pb-16">
         <h2 className="text-3xl md:text-4xl font-bold mb-3 text-blue-500">
-          Our Innovations.
+          Our Products.
         </h2>
         <p className="text-gray-400 mb-10">
           Explore the groundbreaking projects and solutions that are shaping the future
@@ -55,11 +55,13 @@ export default function Innovations() {
                 height={250}
                 className="w-full h-56 object-cover"
               />
-              <div className="p-4 text-left">
+              <div className="p-4 text-center">
                 <h3 className="text-lg font-semibold text-white mb-2">
                   {project.title}
                 </h3>
-                <p className="text-gray-400 text-sm">{project.description}</p>
+                {project.subtitle && (
+                  <p className="text-gray-400 text-sm">{project.subtitle}</p>
+                )}
               </div>
             </Link>
           );

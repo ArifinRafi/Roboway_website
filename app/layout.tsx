@@ -8,23 +8,34 @@ const inter = Inter({
   display: "swap",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://roboway-website.vercel.app";
+
 export const metadata: Metadata = {
   title: "Roboway Technologies | Robotics, AI, and Automation",
   description:
     "Innovating the future with robotics, AI, IoT, software, and drone systems.",
-  metadataBase: new URL("https://roboway.example.com"),
+  metadataBase: new URL(siteUrl),
   openGraph: {
     title: "Roboway Technologies",
     description:
       "Innovating the future with robotics, AI, IoT, software, and drone systems.",
     type: "website",
     url: "/",
+    images: [
+      {
+        url: "/images/roboway-og.png",
+        width: 1200,
+        height: 630,
+        alt: "Roboway Technologies",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Roboway Technologies",
     description:
       "Innovating the future with robotics, AI, IoT, software, and drone systems.",
+    images: ["/images/roboway-og.png"],
   },
 };
 

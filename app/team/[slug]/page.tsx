@@ -2,25 +2,23 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { team } from "@/data/team";
 import Image from "next/image";
+import connectDB from "@/lib/mongodb";
+import TeamMember from "@/models/TeamMember";
+import { team as fallbackTeam } from "@/data/team";
 
 type Params = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return team.map((m) => ({ slug: m.slug }));
-}
-
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
-  const member = team.find((m) => m.slug === slug);
+  const member = await getTeamMember(slug);
   if (!member) return {};
   return { title: `${member.name} | Team | Roboway` };
 }
 
 export default async function TeamMemberPage({ params }: Params) {
   const { slug } = await params;
-  const member = team.find((m) => m.slug === slug);
+  const member = await getTeamMember(slug);
   if (!member) return notFound();
 
   return (
@@ -31,7 +29,7 @@ export default async function TeamMemberPage({ params }: Params) {
           <div className="rounded-2xl border border-white/10 bg-[#0f1620] p-8">
             <div className="flex flex-col items-center gap-6 sm:flex-row">
               <div className="relative h-24 w-24 overflow-hidden rounded-2xl border border-white/10 bg-white/10">
-                <Image src={member.image} alt={member.name} fill className="object-cover" />
+                <Image src={member.image || "/window.svg"} alt={member.name} fill className="object-cover" />
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-white">{member.name}</h1>
@@ -71,6 +69,17 @@ export default async function TeamMemberPage({ params }: Params) {
       <Footer />
     </div>
   );
+}
+
+async function getTeamMember(slug: string) {
+  const fallback = fallbackTeam.find((m) => m.slug === slug);
+  try {
+    await connectDB();
+    const member = await TeamMember.findOne({ slug }).lean();
+    return member || fallback;
+  } catch {
+    return fallback;
+  }
 }
 
 
