@@ -14,11 +14,9 @@ type Material = {
 };
 
 const materials: Material[] = [
-  { name: "PLA+", pricePerGram: 15, density: 1.24 },
-  { name: "ABS", pricePerGram: 12, density: 1.04 },
-  { name: "PETG", pricePerGram: 14, density: 1.27 },
-  { name: "TPU", pricePerGram: 18, density: 1.21 },
-  { name: "Nylon", pricePerGram: 20, density: 1.15 },
+  { name: "PLA+", pricePerGram: 12, density: 1.24 },
+  { name: "PLA", pricePerGram: 9, density: 1.24 },
+  { name: "ABS", pricePerGram: 14, density: 1.04 },
 ];
 
 type Quotation = {
