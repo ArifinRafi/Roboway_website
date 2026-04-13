@@ -9,10 +9,10 @@ export default function TeamGrid({ team }: { team?: ProjectTeamMember[] }) {
       {team.map((m) => (
         <div
           key={m.name}
-          className="rounded-xl border border-white/10 bg-white/5 p-4"
+          className="rounded-xl border border-white/[0.08] bg-black/50 p-4"
         >
           <div className="flex items-center gap-4">
-            <div className="relative h-12 w-12 overflow-hidden rounded-full border border-white/10 bg-white/10">
+            <div className="relative h-12 w-12 overflow-hidden rounded-full border border-white/[0.08] bg-white/10">
               {m.image ? (
                 <Image src={m.image} alt={m.name} fill className="object-cover" />
               ) : null}
@@ -20,22 +20,22 @@ export default function TeamGrid({ team }: { team?: ProjectTeamMember[] }) {
             <div>
               <div className="text-sm font-semibold text-white">{m.name}</div>
               {m.role ? (
-                <div className="text-xs text-zinc-400">{m.role}</div>
+                <div className="text-xs text-[#4a5568]">{m.role}</div>
               ) : null}
             </div>
-            <div className="ml-auto flex items-center gap-3 text-zinc-400">
+            <div className="ml-auto flex items-center gap-3 text-[#4a5568]">
               {m.socials?.linkedin ? (
-                <a href={m.socials.linkedin} aria-label="LinkedIn" className="hover:text-white">
+                <a href={m.socials.linkedin} aria-label="LinkedIn" className="hover:text-[#60a5fa]">
                   <FaLinkedin />
                 </a>
               ) : null}
               {m.socials?.github ? (
-                <a href={m.socials.github} aria-label="GitHub" className="hover:text-white">
+                <a href={m.socials.github} aria-label="GitHub" className="hover:text-[#60a5fa]">
                   <FaGithub />
                 </a>
               ) : null}
               {m.socials?.twitter ? (
-                <a href={m.socials.twitter} aria-label="Twitter/X" className="hover:text-white">
+                <a href={m.socials.twitter} aria-label="Twitter/X" className="hover:text-[#60a5fa]">
                   <FaXTwitter />
                 </a>
               ) : null}
@@ -46,5 +46,3 @@ export default function TeamGrid({ team }: { team?: ProjectTeamMember[] }) {
     </div>
   );
 }
-
-

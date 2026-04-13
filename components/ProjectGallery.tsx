@@ -8,7 +8,7 @@ export default function ProjectGallery({ images }: { images?: string[] }) {
       {validImages.map((src) => (
         <div
           key={src}
-          className="relative aspect-[16/9] overflow-hidden rounded-lg border border-white/10 bg-white/5"
+          className="relative aspect-[16/9] overflow-hidden rounded-lg border border-white/[0.08] bg-black/50"
         >
           <Image src={src} alt="Project image" fill className="object-cover" />
         </div>
@@ -16,5 +16,3 @@ export default function ProjectGallery({ images }: { images?: string[] }) {
     </div>
   );
 }
-
-

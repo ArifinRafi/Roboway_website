@@ -29,23 +29,23 @@ export default async function JobDetail({ params }: Params) {
       <Navbar />
       <main className="pt-20">
         <section className="mx-auto max-w-3xl px-6">
-          <div className="rounded-2xl border border-white/10 bg-[#0f1620] p-8">
+          <div className="rounded-2xl border border-white/[0.08] bg-[#0a0a0a] p-8">
             <h1 className="text-2xl font-bold text-white">{job.title}</h1>
-            <div className="mt-1 text-xs text-zinc-400">{job.location} • {job.type}</div>
-            <p className="mt-4 text-sm text-zinc-300">{job.summary}</p>
+            <div className="mt-1 text-xs text-[#4a5568]">{job.location} • {job.type}</div>
+            <p className="mt-4 text-sm text-[#a0aec0]">{job.summary}</p>
 
             <div className="mt-8 grid gap-6 md:grid-cols-2">
-              <div className="rounded-xl border border-white/10 bg-[#1a1f26] p-5">
+              <div className="rounded-xl border border-white/[0.08] bg-[#111111] p-5">
                 <h2 className="text-sm font-semibold text-white">Responsibilities</h2>
-                <ul className="mt-3 list-disc space-y-2 pl-5 text-xs text-zinc-300">
+                <ul className="mt-3 list-disc space-y-2 pl-5 text-xs text-[#a0aec0]">
                   {job.responsibilities.map((r) => (
                     <li key={r}>{r}</li>
                   ))}
                 </ul>
               </div>
-              <div className="rounded-xl border border-white/10 bg-[#1a1f26] p-5">
+              <div className="rounded-xl border border-white/[0.08] bg-[#111111] p-5">
                 <h2 className="text-sm font-semibold text-white">Requirements</h2>
-                <ul className="mt-3 list-disc space-y-2 pl-5 text-xs text-zinc-300">
+                <ul className="mt-3 list-disc space-y-2 pl-5 text-xs text-[#a0aec0]">
                   {job.requirements.map((r) => (
                     <li key={r}>{r}</li>
                   ))}
@@ -54,9 +54,9 @@ export default async function JobDetail({ params }: Params) {
             </div>
 
             {job.benefits && job.benefits.length > 0 ? (
-              <div className="mt-6 rounded-xl border border-white/10 bg-[#1a1f26] p-5">
+              <div className="mt-6 rounded-xl border border-white/[0.08] bg-[#111111] p-5">
                 <h2 className="text-sm font-semibold text-white">Benefits</h2>
-                <ul className="mt-3 list-disc space-y-2 pl-5 text-xs text-zinc-300">
+                <ul className="mt-3 list-disc space-y-2 pl-5 text-xs text-[#a0aec0]">
                   {job.benefits.map((b) => (
                     <li key={b}>{b}</li>
                   ))}
@@ -65,7 +65,7 @@ export default async function JobDetail({ params }: Params) {
             ) : null}
 
             <div className="mt-8 text-center">
-              <a href="mailto:careers@roboway.example.com" className="rounded-full bg-[#3b82f6] px-6 py-3 text-sm font-semibold text-white">Apply Now</a>
+              <a href="mailto:careers@roboway.example.com" className="rounded-full bg-white text-black px-6 py-3 text-sm font-semibold">Apply Now</a>
             </div>
           </div>
         </section>

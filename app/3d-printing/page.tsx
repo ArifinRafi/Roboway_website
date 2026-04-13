@@ -5,12 +5,14 @@ import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import OrderModal from "@/components/OrderModal";
+import NeonCard from "@/components/ui/NeonCard";
+import AnimatedBackground from "@/components/ui/AnimatedBackground";
 import { Upload, Calculator, CheckCircle, AlertCircle } from "lucide-react";
 
 type Material = {
   name: string;
   pricePerGram: number;
-  density: number; // grams per cm³
+  density: number;
 };
 
 const materials: Material[] = [
@@ -21,8 +23,8 @@ const materials: Material[] = [
 
 type Quotation = {
   material: string;
-  volume: number; // cm³
-  weight: number; // grams
+  volume: number;
+  weight: number;
   pricePerGram: number;
   totalPrice: number;
   fileNames?: string[];
@@ -87,7 +89,6 @@ export default function Printing3D() {
     setError("");
 
     try {
-      // Upload file and calculate
       const formData = new FormData();
       selectedFiles.forEach((file) => formData.append("files", file));
       formData.append("fileCount", selectedFiles.length.toString());
@@ -133,16 +134,16 @@ export default function Printing3D() {
     router.push(`/invoice/${orderId}`);
   };
 
-
   return (
     <div className="min-h-dvh">
       <Navbar />
       <main className="pt-20">
         {/* Banner */}
-        <section className="relative isolate bg-gradient-to-b from-black/90 to-black">
-          <div className="mx-auto max-w-7xl px-6 py-16 text-center">
+        <section className="relative isolate">
+          <AnimatedBackground variant="hero" />
+          <div className="mx-auto max-w-7xl px-6 py-20 text-center">
             <h1 className="text-4xl font-bold text-white sm:text-5xl">3D Printing Products</h1>
-            <p className="mx-auto mt-4 max-w-2xl text-sm text-zinc-300">
+            <p className="mx-auto mt-4 max-w-2xl text-sm text-[#a0aec0]">
               Upload your 3D model and get an instant quote for professional 3D printing services
             </p>
           </div>
@@ -152,17 +153,17 @@ export default function Printing3D() {
         <section className="mx-auto max-w-7xl px-6 py-12">
           <div className="grid gap-6 lg:grid-cols-2">
             {/* File Upload Card */}
-            <div className="rounded-2xl border border-white/10 bg-[#0f1620] p-8">
+            <NeonCard className="p-8">
               <div className="flex flex-col items-center text-center">
-                <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-[#3b82f6]/20 text-[#3b82f6]">
+                <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-[#1e3a5f]/20 text-[#60a5fa] border border-white/10">
                   <Upload size={32} />
                 </div>
                 <h2 className="text-xl font-semibold text-white">Drop your STL or OBJ file</h2>
-                <p className="mt-2 text-sm text-zinc-400">
+                <p className="mt-2 text-sm text-[#4a5568]">
                   Uploading your 3D model is the best way to get an instant quote.
                 </p>
                 <div className="mt-6 w-full">
-                  <label className="flex w-full cursor-pointer flex-col items-center rounded-lg border-2 border-dashed border-white/20 bg-white/5 p-8 hover:border-[#3b82f6]/40">
+                  <label className="flex w-full cursor-pointer flex-col items-center rounded-xl border-2 border-dashed border-white/10 bg-white/[0.02] p-8 transition-all hover:border-[#2563eb]/30 hover:bg-white/[0.04]">
                     <input
                       ref={fileInputRef}
                       type="file"
@@ -173,19 +174,19 @@ export default function Printing3D() {
                     />
                     {selectedFiles.length > 0 ? (
                       <div className="text-center">
-                        <CheckCircle className="mx-auto mb-2 text-green-500" size={32} />
+                        <CheckCircle className="mx-auto mb-2 text-emerald-400" size={32} />
                         <p className="text-sm font-medium text-white">
                           {selectedFiles.length} file(s) selected
                         </p>
-                        <p className="mt-1 text-xs text-zinc-400">
-                          Click to add more files (hold Cmd/Ctrl or Shift to select multiple)
+                        <p className="mt-1 text-xs text-[#4a5568]">
+                          Click to add more files
                         </p>
                       </div>
                     ) : (
                       <div className="text-center">
-                        <Upload className="mx-auto mb-2 text-zinc-400" size={32} />
-                        <p className="text-sm text-zinc-300">Click to upload or drag and drop</p>
-                        <p className="mt-1 text-xs text-zinc-400">STL or OBJ files only</p>
+                        <Upload className="mx-auto mb-2 text-[#4a5568]" size={32} />
+                        <p className="text-sm text-[#a0aec0]">Click to upload or drag and drop</p>
+                        <p className="mt-1 text-xs text-[#4a5568]">STL or OBJ files only</p>
                       </div>
                     )}
                   </label>
@@ -193,37 +194,38 @@ export default function Printing3D() {
                     <button
                       type="button"
                       onClick={() => fileInputRef.current?.click()}
-                      className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-white transition hover:bg-white/10"
+                      className="group relative inline-flex items-center gap-1.5 overflow-hidden rounded-full border border-[#2563eb]/40 bg-[#2563eb]/10 px-3 py-2 font-mono text-[9px] tracking-widest text-white uppercase transition-all duration-300 hover:bg-[#2563eb]/20 hover:border-[#2563eb]/70 hover:shadow-[0_0_12px_rgba(37,99,235,0.3)]"
                     >
-                      Add more files
+                      <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" style={{ background: "linear-gradient(90deg, transparent, rgba(96,165,250,0.08), transparent)" }} />
+                      <span className="relative">Add More Files</span>
                     </button>
                     {selectedFiles.length > 0 && (
                       <button
                         type="button"
                         onClick={() => setSelectedFiles([])}
-                        className="rounded-lg border border-white/10 px-3 py-2 text-xs text-zinc-300 hover:bg-white/10"
+                        className="group relative inline-flex items-center gap-1.5 overflow-hidden rounded-full border border-white/[0.08] px-3 py-2 font-mono text-[9px] tracking-widest text-[#4a5568] uppercase transition-all duration-300 hover:border-white/20 hover:text-[#a0aec0] hover:bg-white/[0.03]"
                       >
-                        Clear all
+                        <span className="relative">Clear All</span>
                       </button>
                     )}
                   </div>
                   {selectedFiles.length > 0 && (
-                    <div className="mt-4 space-y-2 text-xs text-zinc-300">
+                    <div className="mt-4 space-y-2 text-xs">
                       {selectedFiles.map((file, index) => (
                         <div
                           key={`${file.name}-${file.size}-${index}`}
-                          className="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 px-3 py-2"
+                          className="flex items-center justify-between rounded-lg border border-white/[0.06] bg-white/[0.03] px-3 py-2"
                         >
                           <div className="truncate">
                             <span className="text-white">{file.name}</span>
-                            <span className="ml-2 text-zinc-500">
+                            <span className="ml-2 text-[#4a5568] font-mono">
                               {(file.size / 1024).toFixed(2)} KB
                             </span>
                           </div>
                           <button
                             type="button"
                             onClick={() => removeFile(index)}
-                            className="text-xs text-red-300 hover:text-red-200"
+                            className="text-xs text-red-400 hover:text-red-300"
                           >
                             Remove
                           </button>
@@ -232,42 +234,29 @@ export default function Printing3D() {
                     </div>
                   )}
                 </div>
-                <p className="mt-4 flex items-center gap-2 text-xs text-zinc-500">
-                  <svg
-                    className="h-4 w-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                    />
+                <p className="mt-4 flex items-center gap-2 text-xs text-[#4a5568]">
+                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                   </svg>
                   All uploads are secure and confidential
                 </p>
               </div>
-            </div>
+            </NeonCard>
 
             {/* Print Settings Card */}
-            <div className="rounded-2xl border border-white/10 bg-[#0f1620] p-8">
+            <NeonCard className="p-8">
               <h2 className="mb-6 text-xl font-semibold text-white">Print Settings</h2>
-              
-              <div className="space-y-4">
-                {/* Material Type */}
+
+              <div className="space-y-6">
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-zinc-300">
-                    Material Type
-                  </label>
+                  <label className="mb-2 block text-sm font-medium text-[#a0aec0]">Material Type</label>
                   <select
                     value={selectedMaterial.name}
                     onChange={(e) => {
                       const material = materials.find((m) => m.name === e.target.value);
                       if (material) setSelectedMaterial(material);
                     }}
-                    className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-white focus:border-[#3b82f6] focus:outline-none"
+                    className="w-full rounded-lg border border-white/[0.08] bg-black/50 px-4 py-2.5 text-white transition-all focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 focus:outline-none"
                   >
                     {materials.map((material) => (
                       <option key={material.name} value={material.name}>
@@ -277,42 +266,34 @@ export default function Printing3D() {
                   </select>
                 </div>
 
-                {/* Infill Density */}
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-zinc-300">
-                    Infill Density: {infillDensity}%
+                  <label className="mb-2 block text-sm font-medium text-[#a0aec0]">
+                    Infill Density: <span className="text-[#60a5fa] font-mono">{infillDensity}%</span>
                   </label>
                   <input
-                    type="range"
-                    min="0"
-                    max="100"
-                    step="5"
+                    type="range" min="0" max="100" step="5"
                     value={infillDensity}
                     onChange={(e) => setInfillDensity(parseInt(e.target.value))}
                     className="w-full"
                   />
-                  <div className="mt-1 flex justify-between text-xs text-zinc-500">
-                    <span>0% (Hollow)</span>
-                    <span>50% (Medium)</span>
-                    <span>100% (Solid)</span>
+                  <div className="mt-1 flex justify-between text-xs text-[#4a5568] font-mono">
+                    <span>0% Hollow</span>
+                    <span>50% Medium</span>
+                    <span>100% Solid</span>
                   </div>
                 </div>
 
-                {/* Wall Count */}
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-zinc-300">
-                    Wall Count: {wallCount}
+                  <label className="mb-2 block text-sm font-medium text-[#a0aec0]">
+                    Wall Count: <span className="text-[#60a5fa] font-mono">{wallCount}</span>
                   </label>
                   <input
-                    type="range"
-                    min="1"
-                    max="6"
-                    step="1"
+                    type="range" min="1" max="6" step="1"
                     value={wallCount}
                     onChange={(e) => setWallCount(parseInt(e.target.value))}
                     className="w-full"
                   />
-                  <div className="mt-1 flex justify-between text-xs text-zinc-500">
+                  <div className="mt-1 flex justify-between text-xs text-[#4a5568] font-mono">
                     <span>1</span>
                     <span>3</span>
                     <span>6</span>
@@ -320,109 +301,86 @@ export default function Printing3D() {
                 </div>
               </div>
 
-              {/* Calculate Button */}
               <button
                 onClick={calculatePrice}
                 disabled={selectedFiles.length === 0 || isCalculating}
-                className="mt-6 w-full rounded-lg bg-[#3b82f6] px-6 py-3 font-semibold text-white transition hover:bg-[#2563eb] disabled:cursor-not-allowed disabled:opacity-50"
+                className="group relative mt-8 inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-full border border-[#2563eb]/50 bg-[#2563eb]/15 px-6 py-3 font-mono text-[11px] tracking-widest text-white uppercase transition-all duration-300 hover:bg-[#2563eb]/28 hover:border-[#2563eb]/80 hover:shadow-[0_0_24px_rgba(37,99,235,0.45)] disabled:cursor-not-allowed disabled:opacity-50"
               >
+                <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" style={{ background: "linear-gradient(90deg, transparent, rgba(96,165,250,0.1), transparent)" }} />
                 {isCalculating ? (
-                  <span className="flex items-center justify-center gap-2">
-                    <svg
-                      className="h-5 w-5 animate-spin"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                      />
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      />
+                  <>
+                    <svg className="relative h-4 w-4 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                     </svg>
-                    Calculating...
-                  </span>
+                    <span className="relative">Processing...</span>
+                  </>
                 ) : (
-                  <span className="flex items-center justify-center gap-2">
-                    <Calculator size={20} />
-                    Calculate Price
-                  </span>
+                  <>
+                    <Calculator size={14} className="relative" />
+                    <span className="relative">Calculate Price</span>
+                  </>
                 )}
               </button>
-            </div>
+            </NeonCard>
           </div>
 
           {/* Quotation Display */}
           {quotation && (
-            <div className="mt-6 rounded-2xl border border-white/10 bg-[#0f1620] p-8">
-              <h3 className="mb-4 text-xl font-semibold text-white">Quotation</h3>
+            <NeonCard className="mt-8 p-8">
+              <h3 className="mb-6 text-xl font-semibold gradient-text">Quotation</h3>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-                  <p className="text-xs text-zinc-400">Material</p>
-                  <p className="mt-1 text-lg font-semibold text-white">{quotation.material}</p>
+                <div className="rounded-lg border border-white/[0.06] bg-white/[0.03] p-4">
+                  <p className="text-xs text-[#4a5568]">Material</p>
+                  <p className="mt-1 text-lg font-semibold text-white font-mono">{quotation.material}</p>
                 </div>
-                <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-                  <p className="text-xs text-zinc-400">Volume</p>
-                  <p className="mt-1 text-lg font-semibold text-white">
-                    {quotation.volume.toFixed(2)} cm³
-                  </p>
+                <div className="rounded-lg border border-white/[0.06] bg-white/[0.03] p-4">
+                  <p className="text-xs text-[#4a5568]">Volume</p>
+                  <p className="mt-1 text-lg font-semibold text-white font-mono">{quotation.volume.toFixed(2)} cm³</p>
                 </div>
-                <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-                  <p className="text-xs text-zinc-400">Weight</p>
-                  <p className="mt-1 text-lg font-semibold text-white">
-                    {quotation.weight.toFixed(2)} g
-                  </p>
+                <div className="rounded-lg border border-white/[0.06] bg-white/[0.03] p-4">
+                  <p className="text-xs text-[#4a5568]">Weight</p>
+                  <p className="mt-1 text-lg font-semibold text-white font-mono">{quotation.weight.toFixed(2)} g</p>
                 </div>
-                <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-                  <p className="text-xs text-zinc-400">Total Price</p>
-                  <p className="mt-1 text-lg font-semibold text-[#3b82f6]">
-                    {quotation.totalPrice.toFixed(2)} BDT
-                  </p>
+                <div className="rounded-lg border border-white/[0.06] bg-white/[0.03] p-4">
+                  <p className="text-xs text-[#4a5568]">Total Price</p>
+                  <p className="mt-1 text-lg font-semibold text-[#60a5fa] neon-glow font-mono">{quotation.totalPrice.toFixed(2)} BDT</p>
                 </div>
               </div>
               {!orderConfirmed ? (
                 <button
                   onClick={handleOrderClick}
-                  className="mt-6 w-full rounded-lg bg-green-600 px-6 py-3 font-semibold text-white transition hover:bg-green-700"
+                  className="group relative mt-6 inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-full border border-[#2563eb]/50 bg-[#2563eb]/15 px-6 py-3 font-mono text-[11px] tracking-widest text-white uppercase transition-all duration-300 hover:bg-[#2563eb]/28 hover:border-[#2563eb]/80 hover:shadow-[0_0_24px_rgba(37,99,235,0.45)]"
                 >
-                  Order Now
+                  <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" style={{ background: "linear-gradient(90deg, transparent, rgba(96,165,250,0.1), transparent)" }} />
+                  <span className="relative">Order Now</span>
                 </button>
               ) : (
-                <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-6">
+                <NeonCard className="mt-6 p-6">
                   <div className="flex items-start gap-4">
-                    <div className="mt-1 rounded-full bg-green-500/20 p-2 text-green-400">
+                    <div className="mt-1 rounded-full bg-emerald-500/20 p-2 text-emerald-400">
                       <CheckCircle size={22} />
                     </div>
                     <div>
                       <p className="text-lg font-semibold text-white">Thanks for ordering!</p>
-                      <p className="mt-1 text-sm text-zinc-300">
-                        We will contact you soon with order details.
-                      </p>
+                      <p className="mt-1 text-sm text-[#a0aec0]">We will contact you soon with order details.</p>
                       {orderId ? (
-                        <p className="mt-2 text-xs text-zinc-400">
-                          Order ID: <span className="font-mono text-zinc-200">{orderId}</span>
+                        <p className="mt-2 text-xs text-[#4a5568]">
+                          Order ID: <span className="font-mono text-[#60a5fa]">{orderId}</span>
                         </p>
                       ) : null}
                     </div>
                   </div>
-                  <p className="mt-4 text-sm text-zinc-400">Redirecting to invoice...</p>
-                </div>
+                  <p className="mt-4 text-sm text-[#4a5568]">Redirecting to invoice...</p>
+                </NeonCard>
               )}
-            </div>
+            </NeonCard>
           )}
 
           {/* Error Display */}
           {error && (
-            <div className="mt-6 rounded-lg bg-red-500/20 border border-red-500/50 p-4 flex items-center gap-2">
-              <AlertCircle className="text-red-500" size={20} />
+            <div className="mt-6 rounded-lg bg-red-500/10 border border-red-500/30 p-4 flex items-center gap-2">
+              <AlertCircle className="text-red-400" size={20} />
               <p className="text-sm text-red-400">{error}</p>
             </div>
           )}
@@ -430,13 +388,12 @@ export default function Printing3D() {
       </main>
       <Footer />
 
-      {/* Order Modal */}
-              {quotation && selectedFiles.length > 0 && (
+      {quotation && selectedFiles.length > 0 && (
         <OrderModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           quotation={quotation}
-                  selectedFiles={selectedFiles}
+          selectedFiles={selectedFiles}
           material={selectedMaterial.name}
           infillDensity={infillDensity}
           onOrderSuccess={handleOrderSuccess}
@@ -445,4 +402,3 @@ export default function Printing3D() {
     </div>
   );
 }
-

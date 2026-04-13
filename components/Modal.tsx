@@ -22,7 +22,7 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
           transition={{ duration: 0.2 }}
         >
           <motion.div
-            className="relative w-full max-w-lg rounded-2xl border border-white/10 bg-[#0f1620] p-6 shadow-2xl"
+            className="relative w-full max-w-lg rounded-2xl border border-white/10 bg-[#0a0a0a]/95 backdrop-blur-xl p-6 shadow-2xl"
             initial={{ opacity: 0, y: 16, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.98 }}
@@ -30,12 +30,12 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
           >
             <button
               onClick={onClose}
-              className="absolute right-4 top-4 rounded-lg p-2 text-zinc-400 transition hover:bg-white/10 hover:text-white"
+              className="absolute right-4 top-4 rounded-lg p-2 text-[#4a5568] transition hover:bg-white/10 hover:text-[#60a5fa]"
             >
               <X size={20} />
             </button>
             <h3 className="text-lg font-semibold text-white">{title}</h3>
-            <div className="mt-4 text-sm text-zinc-300">{children}</div>
+            <div className="mt-4 text-sm text-[#a0aec0]">{children}</div>
           </motion.div>
         </motion.div>
       ) : null}

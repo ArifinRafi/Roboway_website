@@ -147,7 +147,7 @@ export default function InvoicePage() {
       <Navbar />
       <main className="pt-20">
         <section className="mx-auto max-w-4xl px-6 py-12">
-          <div className="rounded-2xl border border-white/10 bg-[#0f1620] p-6">
+          <div className="rounded-2xl border border-white/[0.08] bg-[#0a0a0a] p-6">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div className="flex items-center gap-4">
                 <div className="h-12 w-12 rounded-xl bg-white/5 p-2">
@@ -155,26 +155,26 @@ export default function InvoicePage() {
                 </div>
                 <div>
                   <h1 className="text-2xl font-semibold">Invoice</h1>
-                  <p className="text-sm text-zinc-400">Roboway Technologies</p>
-                  <p className="text-xs text-zinc-500">Dhaka, Bangladesh</p>
+                  <p className="text-sm text-[#4a5568]">Roboway Technologies</p>
+                  <p className="text-xs text-[#4a5568]">Dhaka, Bangladesh</p>
                 </div>
               </div>
               {order ? (
                 <button
                   type="button"
                   onClick={handleDownloadPdf}
-                  className="rounded-lg bg-[#3b82f6] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#2563eb]"
+                  className="rounded-lg bg-white text-black px-4 py-2 text-sm font-semibold transition hover:bg-[#1d4ed8]"
                 >
                   Download PDF
                 </button>
               ) : null}
             </div>
-            <div className="mt-4 rounded-xl border border-white/10 bg-white/5 p-4 text-sm text-zinc-300">
+            <div className="mt-4 rounded-xl border border-white/[0.08] bg-white/5 p-4 text-sm text-[#a0aec0]">
               Thanks for ordering. We will contact you soon with order details.
             </div>
 
             {loading && (
-              <div className="mt-6 rounded-lg border border-white/10 bg-white/5 p-4 text-sm text-zinc-400">
+              <div className="mt-6 rounded-lg border border-white/[0.08] bg-white/5 p-4 text-sm text-[#4a5568]">
                 Loading invoice...
               </div>
             )}
@@ -185,28 +185,28 @@ export default function InvoicePage() {
             )}
 
             {order && (
-              <div className="mt-6 space-y-4 text-sm text-zinc-300">
-                <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-                  <div className="text-xs text-zinc-400">Order ID</div>
+              <div className="mt-6 space-y-4 text-sm text-[#a0aec0]">
+                <div className="rounded-lg border border-white/[0.08] bg-white/5 p-4">
+                  <div className="text-xs text-[#4a5568]">Order ID</div>
                   <div className="mt-1 font-mono text-white">{order.orderId}</div>
-                  <div className="mt-2 text-xs text-zinc-400">Date</div>
+                  <div className="mt-2 text-xs text-[#4a5568]">Date</div>
                   <div className="mt-1 text-white">{formattedDate}</div>
                 </div>
 
                 <div className="grid gap-4 md:grid-cols-2">
-                  <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-                    <div className="text-xs text-zinc-400">Customer</div>
+                  <div className="rounded-lg border border-white/[0.08] bg-white/5 p-4">
+                    <div className="text-xs text-[#4a5568]">Customer</div>
                     <div className="mt-1 text-white">{order.customerInfo.fullName}</div>
-                    <div className="mt-2 text-xs text-zinc-400">Email</div>
+                    <div className="mt-2 text-xs text-[#4a5568]">Email</div>
                     <div className="mt-1 text-white">{order.customerInfo.email}</div>
-                    <div className="mt-2 text-xs text-zinc-400">Phone</div>
+                    <div className="mt-2 text-xs text-[#4a5568]">Phone</div>
                     <div className="mt-1 text-white">{order.customerInfo.phone}</div>
-                    <div className="mt-2 text-xs text-zinc-400">Address</div>
+                    <div className="mt-2 text-xs text-[#4a5568]">Address</div>
                     <div className="mt-1 text-white">{order.customerInfo.address}</div>
                   </div>
 
-                  <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-                    <div className="text-xs text-zinc-400">Print Details</div>
+                  <div className="rounded-lg border border-white/[0.08] bg-white/5 p-4">
+                    <div className="text-xs text-[#4a5568]">Print Details</div>
                     <div className="mt-1 text-white">Material: {order.printConfig.material}</div>
                     <div className="mt-2 text-white">Infill: {order.printConfig.infillDensity}%</div>
                     <div className="mt-2 text-white">
@@ -218,7 +218,7 @@ export default function InvoicePage() {
                     <div className="mt-2 text-white">
                       Price/Gram: {order.printConfig.pricePerGram} BDT
                     </div>
-                    <div className="mt-4 text-lg font-semibold text-[#3b82f6]">
+                    <div className="mt-4 text-lg font-semibold text-[#60a5fa]">
                       Total: {order.printConfig.totalPrice.toFixed(2)} BDT
                     </div>
                   </div>

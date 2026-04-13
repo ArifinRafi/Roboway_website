@@ -26,26 +26,26 @@ export default async function TeamMemberPage({ params }: Params) {
       <Navbar />
       <main className="pt-20">
         <section className="mx-auto max-w-4xl px-6 pb-16">
-          <div className="rounded-2xl border border-white/10 bg-[#0f1620] p-8">
+          <div className="rounded-2xl border border-white/[0.08] bg-[#0a0a0a] p-8">
             <div className="flex flex-col items-center gap-6 sm:flex-row">
-              <div className="relative h-24 w-24 overflow-hidden rounded-2xl border border-white/10 bg-white/10">
-                <Image src={member.image || "/window.svg"} alt={member.name} fill className="object-cover" />
+              <div className="relative h-24 w-24 overflow-hidden rounded-2xl border border-white/[0.08] bg-white/10">
+                <Image src={member.image || "/images/logo.png"} alt={member.name} fill className="object-cover" />
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-white">{member.name}</h1>
-                <div className="text-sm text-zinc-400">{member.title}</div>
+                <div className="text-sm text-[#4a5568]">{member.title}</div>
               </div>
             </div>
 
             {member.summary ? (
-              <p className="mt-6 text-sm text-zinc-300">{member.summary}</p>
+              <p className="mt-6 text-sm text-[#a0aec0]">{member.summary}</p>
             ) : null}
 
             <div className="mt-8 grid gap-6 sm:grid-cols-2">
               {member.education && member.education.length ? (
-                <div className="rounded-xl border border-white/10 bg-[#1a1f26] p-5">
+                <div className="rounded-xl border border-white/[0.08] bg-[#111111] p-5">
                   <h2 className="text-sm font-semibold text-white">Education</h2>
-                  <ul className="mt-3 list-disc space-y-2 pl-5 text-xs text-zinc-300">
+                  <ul className="mt-3 list-disc space-y-2 pl-5 text-xs text-[#a0aec0]">
                     {member.education.map((e) => (
                       <li key={e}>{e}</li>
                     ))}
@@ -53,9 +53,9 @@ export default async function TeamMemberPage({ params }: Params) {
                 </div>
               ) : null}
               {member.expertise && member.expertise.length ? (
-                <div className="rounded-xl border border-white/10 bg-[#1a1f26] p-5">
+                <div className="rounded-xl border border-white/[0.08] bg-[#111111] p-5">
                   <h2 className="text-sm font-semibold text-white">Expertise</h2>
-                  <ul className="mt-3 list-disc space-y-2 pl-5 text-xs text-zinc-300">
+                  <ul className="mt-3 list-disc space-y-2 pl-5 text-xs text-[#a0aec0]">
                     {member.expertise.map((e) => (
                       <li key={e}>{e}</li>
                     ))}

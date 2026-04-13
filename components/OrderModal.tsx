@@ -145,11 +145,11 @@ export default function OrderModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-      <div className="relative w-full max-w-2xl rounded-2xl border border-white/10 bg-[#0f1620] p-8 shadow-2xl">
+      <div className="relative w-full max-w-2xl rounded-2xl border border-white/10 bg-[#0a0a0a]/95 backdrop-blur-xl p-8 shadow-2xl">
         {/* Close Button */}
         <button
           onClick={handleClose}
-          className="absolute right-4 top-4 rounded-lg p-2 text-zinc-400 transition hover:bg-white/10 hover:text-white"
+          className="absolute right-4 top-4 rounded-lg p-2 text-[#4a5568] transition hover:bg-white/10 hover:text-[#60a5fa]"
           disabled={isSubmitting}
         >
           <X size={24} />
@@ -158,24 +158,24 @@ export default function OrderModal({
         {/* Header */}
         <div className="mb-6">
           <h2 className="text-2xl font-bold text-white">Complete Your Order</h2>
-          <p className="mt-2 text-sm text-zinc-400">
+          <p className="mt-2 text-sm text-[#4a5568]">
             Please provide your contact information to proceed with the order.
           </p>
         </div>
 
         {/* Success Message */}
         {success && (
-          <div className="mb-6 rounded-2xl border border-white/10 bg-white/5 p-6">
+          <div className="mb-6 rounded-2xl border border-white/[0.08] bg-black/50 p-6">
             <div className="flex items-start gap-4">
               <div className="mt-1 rounded-full bg-green-500/20 p-2 text-green-400">
                 <CheckCircle size={22} />
               </div>
               <div>
                 <p className="text-lg font-semibold text-white">Thanks for ordering!</p>
-                <p className="mt-1 text-sm text-zinc-300">
+                <p className="mt-1 text-sm text-[#a0aec0]">
                   We will contact you soon with order details.
                 </p>
-                <p className="mt-2 text-xs text-zinc-400">
+                <p className="mt-2 text-xs text-[#4a5568]">
                   Order ID: <span className="font-mono text-zinc-200">{orderId}</span>
                 </p>
               </div>
@@ -193,29 +193,29 @@ export default function OrderModal({
 
         {/* Order Summary */}
         {!success && (
-          <div className="mb-6 rounded-lg border border-white/10 bg-white/5 p-4">
-            <h3 className="mb-3 text-sm font-semibold text-zinc-300">Order Summary</h3>
+          <div className="mb-6 rounded-lg border border-white/[0.08] bg-black/50 p-4">
+            <h3 className="mb-3 text-sm font-semibold text-[#a0aec0]">Order Summary</h3>
             <div className="grid gap-2 text-sm">
               <div className="flex justify-between">
-                <span className="text-zinc-400">Files:</span>
+                <span className="text-[#4a5568]">Files:</span>
                 <span className="text-white">{quotation.fileNames?.length || 1}</span>
               </div>
               {quotation.fileNames && quotation.fileNames.length > 0 ? (
-                <div className="text-xs text-zinc-400">
+                <div className="text-xs text-[#4a5568]">
                   {quotation.fileNames.join(", ")}
                 </div>
               ) : null}
               <div className="flex justify-between">
-                <span className="text-zinc-400">Material:</span>
+                <span className="text-[#4a5568]">Material:</span>
                 <span className="text-white">{quotation.material}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-zinc-400">Infill:</span>
+                <span className="text-[#4a5568]">Infill:</span>
                 <span className="text-white">{infillDensity}%</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-zinc-400">Total Price:</span>
-                <span className="text-lg font-semibold text-[#3b82f6]">
+                <span className="text-[#4a5568]">Total Price:</span>
+                <span className="text-lg font-semibold text-[#60a5fa]">
                   {quotation.totalPrice.toFixed(2)} BDT
                 </span>
               </div>
@@ -228,7 +228,7 @@ export default function OrderModal({
           <form onSubmit={handleSubmit} className="space-y-4" noValidate>
             {/* Full Name */}
             <div>
-              <label htmlFor="fullName" className="mb-2 block text-sm font-medium text-zinc-300">
+              <label htmlFor="fullName" className="mb-2 block text-sm font-medium text-[#a0aec0]">
                 Full Name <span className="text-red-400">*</span>
               </label>
               <input
@@ -238,14 +238,14 @@ export default function OrderModal({
                 value={formData.fullName}
                 onChange={handleChange}
                 disabled={isSubmitting}
-                className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-white placeholder:text-zinc-500 focus:border-[#3b82f6] focus:outline-none disabled:opacity-50"
+                className="w-full rounded-lg border border-white/[0.08] bg-black/50 px-4 py-2 text-white placeholder:text-[#4a5568] focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 focus:outline-none disabled:opacity-50"
                 placeholder="John Doe"
               />
             </div>
 
             {/* Address */}
             <div>
-              <label htmlFor="address" className="mb-2 block text-sm font-medium text-zinc-300">
+              <label htmlFor="address" className="mb-2 block text-sm font-medium text-[#a0aec0]">
                 Address <span className="text-red-400">*</span>
               </label>
               <textarea
@@ -255,14 +255,14 @@ export default function OrderModal({
                 onChange={handleChange}
                 disabled={isSubmitting}
                 rows={3}
-                className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-white placeholder:text-zinc-500 focus:border-[#3b82f6] focus:outline-none disabled:opacity-50 resize-none"
+                className="w-full rounded-lg border border-white/[0.08] bg-black/50 px-4 py-2 text-white placeholder:text-[#4a5568] focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 focus:outline-none disabled:opacity-50 resize-none"
                 placeholder="Street address, City, Postal Code"
               />
             </div>
 
             {/* Phone */}
             <div>
-              <label htmlFor="phone" className="mb-2 block text-sm font-medium text-zinc-300">
+              <label htmlFor="phone" className="mb-2 block text-sm font-medium text-[#a0aec0]">
                 Phone Number <span className="text-red-400">*</span>
               </label>
               <input
@@ -274,14 +274,14 @@ export default function OrderModal({
                 disabled={isSubmitting}
                 inputMode="tel"
                 autoComplete="tel"
-                className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-white placeholder:text-zinc-500 focus:border-[#3b82f6] focus:outline-none disabled:opacity-50"
+                className="w-full rounded-lg border border-white/[0.08] bg-black/50 px-4 py-2 text-white placeholder:text-[#4a5568] focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 focus:outline-none disabled:opacity-50"
                 placeholder="+880 1234 567890"
               />
             </div>
 
             {/* Email */}
             <div>
-              <label htmlFor="email" className="mb-2 block text-sm font-medium text-zinc-300">
+              <label htmlFor="email" className="mb-2 block text-sm font-medium text-[#a0aec0]">
                 Email Address <span className="text-red-400">*</span>
               </label>
               <input
@@ -293,7 +293,7 @@ export default function OrderModal({
                 disabled={isSubmitting}
                 inputMode="email"
                 autoComplete="email"
-                className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-white placeholder:text-zinc-500 focus:border-[#3b82f6] focus:outline-none disabled:opacity-50"
+                className="w-full rounded-lg border border-white/[0.08] bg-black/50 px-4 py-2 text-white placeholder:text-[#4a5568] focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20 focus:outline-none disabled:opacity-50"
                 placeholder="john.doe@example.com"
               />
             </div>
@@ -304,22 +304,23 @@ export default function OrderModal({
                 type="button"
                 onClick={handleClose}
                 disabled={isSubmitting}
-                className="flex-1 rounded-lg border border-white/10 bg-white/5 px-6 py-3 font-semibold text-white transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50"
+                className="group relative flex-1 inline-flex items-center justify-center gap-1.5 overflow-hidden rounded-full border border-white/[0.08] px-6 py-3 font-mono text-[10px] tracking-widest text-[#4a5568] uppercase transition-all duration-300 hover:border-white/20 hover:text-[#a0aec0] hover:bg-white/[0.03] disabled:cursor-not-allowed disabled:opacity-50"
               >
-                Cancel
+                <span className="relative">Cancel</span>
               </button>
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex-1 rounded-lg bg-[#3b82f6] px-6 py-3 font-semibold text-white transition hover:bg-[#2563eb] disabled:cursor-not-allowed disabled:opacity-50"
+                className="group relative flex-1 inline-flex items-center justify-center gap-2 overflow-hidden rounded-full border border-[#2563eb]/50 bg-[#2563eb]/15 px-6 py-3 font-mono text-[10px] tracking-widest text-white uppercase transition-all duration-300 hover:bg-[#2563eb]/28 hover:border-[#2563eb]/80 hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] disabled:cursor-not-allowed disabled:opacity-50"
               >
+                <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" style={{ background: "linear-gradient(90deg, transparent, rgba(96,165,250,0.1), transparent)" }} />
                 {isSubmitting ? (
-                  <span className="flex items-center justify-center gap-2">
-                    <Loader2 className="h-5 w-5 animate-spin" />
+                  <span className="relative flex items-center gap-2">
+                    <Loader2 className="h-4 w-4 animate-spin" />
                     Processing...
                   </span>
                 ) : (
-                  "Confirm Order"
+                  <span className="relative">Confirm Order</span>
                 )}
               </button>
             </div>

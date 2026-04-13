@@ -31,7 +31,7 @@ export default function WorkshopRegistrationForm() {
   const [seatsError, setSeatsError] = useState("");
 
   const inputClass =
-    "w-full rounded-md border border-white/10 bg-black/30 px-3 py-2 text-sm text-white outline-none placeholder:text-zinc-500 focus:border-[#3b82f6]";
+    "w-full rounded-md border border-white/[0.08] bg-black/50 px-3 py-2 text-sm text-white outline-none placeholder:text-[#4a5568] focus:border-[#2563eb] focus:ring-2 focus:ring-[#2563eb]/20";
 
   const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
   const validatePhone = (phone: string) => /^[0-9+\-\s]{8,20}$/.test(phone.trim());
@@ -111,20 +111,20 @@ export default function WorkshopRegistrationForm() {
       : "Checking seats...";
 
   return (
-    <div className="rounded-xl border border-white/10 bg-white/5 p-6">
+    <div className="rounded-xl border border-white/[0.08] bg-black/50 p-6">
       <h3 className="text-lg font-semibold text-white">Register Now</h3>
-      <p className="mt-1 text-sm text-zinc-400">
+      <p className="mt-1 text-sm text-[#4a5568]">
         Fill out the form and submit your payment reference to reserve your seat.
       </p>
       <p className="mt-3 text-sm font-semibold text-[#93c5fd]">{seatsLabel}</p>
-      {seatsError && <p className="mt-2 text-xs text-zinc-500">{seatsError}</p>}
+      {seatsError && <p className="mt-2 text-xs text-[#4a5568]">{seatsError}</p>}
       {isSoldOut && <p className="mt-2 text-xs text-amber-400">All seats are filled.</p>}
 
       {error && <p className="mt-3 text-sm text-red-400">{error}</p>}
 
       <form onSubmit={handleSubmit} className="mt-6 grid gap-4">
         <div>
-          <label className="mb-1 block text-sm text-zinc-300">Full Name</label>
+          <label className="mb-1 block text-sm text-[#a0aec0]">Full Name</label>
           <input
             name="fullName"
             value={form.fullName}
@@ -135,7 +135,7 @@ export default function WorkshopRegistrationForm() {
         </div>
 
         <div>
-          <label className="mb-1 block text-sm text-zinc-300">Education Level</label>
+          <label className="mb-1 block text-sm text-[#a0aec0]">Education Level</label>
           <select
             name="educationLevel"
             value={form.educationLevel}
@@ -150,7 +150,7 @@ export default function WorkshopRegistrationForm() {
         </div>
 
         <div>
-          <label className="mb-1 block text-sm text-zinc-300">Class / Semester</label>
+          <label className="mb-1 block text-sm text-[#a0aec0]">Class / Semester</label>
           <input
             name="classSemester"
             value={form.classSemester}
@@ -161,7 +161,7 @@ export default function WorkshopRegistrationForm() {
         </div>
 
         <div>
-          <label className="mb-1 block text-sm text-zinc-300">Phone Number</label>
+          <label className="mb-1 block text-sm text-[#a0aec0]">Phone Number</label>
           <input
             name="phone"
             value={form.phone}
@@ -173,7 +173,7 @@ export default function WorkshopRegistrationForm() {
         </div>
 
         <div>
-          <label className="mb-1 block text-sm text-zinc-300">Email Address</label>
+          <label className="mb-1 block text-sm text-[#a0aec0]">Email Address</label>
           <input
             name="email"
             value={form.email}
@@ -185,7 +185,7 @@ export default function WorkshopRegistrationForm() {
         </div>
 
         <div>
-          <label className="mb-1 block text-sm text-zinc-300">bKash Transaction Code</label>
+          <label className="mb-1 block text-sm text-[#a0aec0]">bKash Transaction Code</label>
           <input
             name="bkashCode"
             value={form.bkashCode}
@@ -198,9 +198,10 @@ export default function WorkshopRegistrationForm() {
         <button
           type="submit"
           disabled={submitting || isSoldOut}
-          className="rounded-md bg-[#3b82f6] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#2563eb] disabled:opacity-60"
+          className="group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-full border border-[#2563eb]/50 bg-[#2563eb]/15 px-4 py-2.5 font-mono text-[10px] tracking-widest text-white uppercase transition-all duration-300 hover:bg-[#2563eb]/28 hover:border-[#2563eb]/80 hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] disabled:opacity-60 disabled:cursor-not-allowed"
         >
-          {submitting ? "Submitting..." : "Submit Registration"}
+          <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" style={{ background: "linear-gradient(90deg, transparent, rgba(96,165,250,0.1), transparent)" }} />
+          <span className="relative">{submitting ? "Transmitting..." : "Submit Registration"}</span>
         </button>
       </form>
 

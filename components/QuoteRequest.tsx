@@ -10,7 +10,7 @@ type QuoteRequestProps = {
 };
 
 const inputClass =
-  "w-full rounded-lg border border-white/10 bg-black/20 px-3 py-2 text-sm text-white placeholder:text-zinc-500 transition focus:border-[#3b82f6] focus:outline-none focus:ring-2 focus:ring-[#3b82f6]/30";
+  "w-full rounded-lg border border-white/[0.08] bg-black/50 px-3 py-2 text-sm text-white placeholder:text-[#4a5568] transition focus:border-[#2563eb] focus:outline-none focus:ring-2 focus:ring-[#2563eb]/20";
 
 export default function QuoteRequest({ projectSlug, projectTitle }: QuoteRequestProps) {
   const [open, setOpen] = useState(false);
@@ -66,21 +66,22 @@ export default function QuoteRequest({ projectSlug, projectTitle }: QuoteRequest
     <>
       <button
         onClick={() => setOpen(true)}
-        className="rounded-full border border-white/20 bg-gradient-to-r from-[#1d4ed8] to-[#3b82f6] px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition hover:from-[#2563eb] hover:to-[#60a5fa]"
+        className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-[#2563eb]/50 bg-[#2563eb]/15 px-5 py-2 font-mono text-[10px] tracking-widest text-white uppercase transition-all duration-300 hover:bg-[#2563eb]/28 hover:border-[#2563eb]/80 hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:-translate-y-0.5"
       >
-        Ask for Quotation
+        <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" style={{ background: "linear-gradient(90deg, transparent, rgba(96,165,250,0.1), transparent)" }} />
+        <span className="relative">Ask for Quotation</span>
       </button>
 
       <Modal isOpen={open} onClose={() => setOpen(false)} title="Request a Quotation">
-        <div className="rounded-xl border border-white/10 bg-gradient-to-b from-[#0b1220] to-[#0f1620] p-4">
+        <div className="rounded-xl border border-white/[0.08] bg-gradient-to-b from-[#0a0a0a] to-[#0a0a0a]/95 p-4">
           {!success ? (
             <>
-              <p className="text-xs text-zinc-400">
+              <p className="text-xs text-[#4a5568]">
                 Share your needs and timeline. Our team will prepare a tailored proposal.
               </p>
               <form onSubmit={handleSubmit} className="mt-4 space-y-3">
                 <div>
-                  <label className="text-xs text-zinc-400">Name *</label>
+                  <label className="text-xs text-[#4a5568]">Name *</label>
                   <input
                     className={inputClass}
                     value={name}
@@ -90,7 +91,7 @@ export default function QuoteRequest({ projectSlug, projectTitle }: QuoteRequest
                 </div>
                 <div className="grid gap-3 sm:grid-cols-2">
                   <div>
-                    <label className="text-xs text-zinc-400">Email *</label>
+                    <label className="text-xs text-[#4a5568]">Email *</label>
                     <input
                       type="email"
                       className={inputClass}
@@ -100,7 +101,7 @@ export default function QuoteRequest({ projectSlug, projectTitle }: QuoteRequest
                     />
                   </div>
                   <div>
-                    <label className="text-xs text-zinc-400">Contact Number *</label>
+                    <label className="text-xs text-[#4a5568]">Contact Number *</label>
                     <input
                       className={inputClass}
                       value={phone}
@@ -110,7 +111,7 @@ export default function QuoteRequest({ projectSlug, projectTitle }: QuoteRequest
                   </div>
                 </div>
                 <div>
-                  <label className="text-xs text-zinc-400">Organization (optional)</label>
+                  <label className="text-xs text-[#4a5568]">Organization (optional)</label>
                   <input
                     className={inputClass}
                     value={organization}
@@ -118,7 +119,7 @@ export default function QuoteRequest({ projectSlug, projectTitle }: QuoteRequest
                   />
                 </div>
                 <div>
-                  <label className="text-xs text-zinc-400">Details</label>
+                  <label className="text-xs text-[#4a5568]">Details</label>
                   <textarea
                     className={`${inputClass} min-h-[110px]`}
                     value={details}
@@ -131,16 +132,17 @@ export default function QuoteRequest({ projectSlug, projectTitle }: QuoteRequest
                   <button
                     type="button"
                     onClick={() => setOpen(false)}
-                    className="rounded-full border border-white/10 px-4 py-2 text-xs text-zinc-300 hover:bg-white/5"
+                    className="group relative inline-flex items-center gap-1.5 overflow-hidden rounded-full border border-white/[0.08] px-4 py-2 font-mono text-[9px] tracking-widest text-[#4a5568] uppercase transition-all duration-300 hover:border-white/20 hover:text-[#a0aec0] hover:bg-white/[0.03]"
                   >
-                    Cancel
+                    <span className="relative">Cancel</span>
                   </button>
                   <button
                     type="submit"
                     disabled={loading}
-                    className="rounded-full bg-[#3b82f6] px-4 py-2 text-xs font-semibold text-white hover:bg-[#2563eb] disabled:opacity-60"
+                    className="group relative inline-flex items-center gap-1.5 overflow-hidden rounded-full border border-[#2563eb]/50 bg-[#2563eb]/15 px-4 py-2 font-mono text-[9px] tracking-widest text-white uppercase transition-all duration-300 hover:bg-[#2563eb]/28 hover:border-[#2563eb]/80 hover:shadow-[0_0_16px_rgba(37,99,235,0.4)] disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {loading ? "Submitting..." : "Submit Request"}
+                    <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" style={{ background: "linear-gradient(90deg, transparent, rgba(96,165,250,0.1), transparent)" }} />
+                    <span className="relative">{loading ? "Transmitting..." : "Submit Request"}</span>
                   </button>
                 </div>
               </form>
@@ -151,14 +153,14 @@ export default function QuoteRequest({ projectSlug, projectTitle }: QuoteRequest
                 <CheckCircle2 size={24} />
               </div>
               <h4 className="text-base font-semibold text-white">Thank you for your request!</h4>
-              <p className="text-xs text-zinc-300">
+              <p className="text-xs text-[#a0aec0]">
                 Our sales team will be contacting you shortly with the next steps.
               </p>
               <button
                 onClick={() => setOpen(false)}
-                className="mt-2 rounded-full border border-white/10 px-4 py-2 text-xs text-zinc-300 hover:bg-white/5"
+                className="group relative mt-2 inline-flex items-center gap-1.5 overflow-hidden rounded-full border border-white/[0.08] px-4 py-2 font-mono text-[9px] tracking-widest text-[#4a5568] uppercase transition-all duration-300 hover:border-white/20 hover:text-[#a0aec0] hover:bg-white/[0.03]"
               >
-                Close
+                <span className="relative">Close</span>
               </button>
             </div>
           )}
