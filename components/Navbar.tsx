@@ -7,13 +7,14 @@ import { Menu, X, ChevronDown, Zap } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 const navItems = [
-  { href: "/",            label: "Home",       code: "01" },
-  { href: "/innovations", label: "Products",   code: "02" },
-  { href: "/3d-printing", label: "3D Print",   code: "03" },
-  { href: "/#about",      label: "About",      code: "04" },
-  { href: "/careers",     label: "Careers",    code: "05" },
-  { href: "/workshops",   label: "Workshops",  code: "06" },
-  { href: "/#contact",    label: "Contact",    code: "07" },
+  { href: "/",            label: "Home",         code: "01" },
+  { href: "/innovations", label: "Products",     code: "02" },
+  { href: "/3d-printing", label: "3D Print",     code: "03" },
+  { href: "/#about",      label: "About",        code: "04" },
+  { href: "/#clients",    label: "Our Clients",  code: "05" },
+  { href: "/careers",     label: "Careers",      code: "06" },
+  { href: "/workshops",   label: "Workshops",    code: "07" },
+  { href: "/#contact",    label: "Contact",      code: "08" },
 ];
 
 const defaultWorkshops = [{ title: "Satellite Workshop", href: "/satellite-workshop" }];

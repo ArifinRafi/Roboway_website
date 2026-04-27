@@ -16,7 +16,7 @@ const TRACK = [...CLIENT_LOGOS, ...CLIENT_LOGOS, ...CLIENT_LOGOS];
 
 export default function Clients() {
   return (
-    <section className="mx-auto max-w-7xl px-6 py-20">
+    <section id="clients" className="mx-auto max-w-7xl px-6 py-20">
       {/* Heading */}
       <div className="text-center mb-12">
         <div className="inline-flex items-center gap-2 rounded-full border border-[#1e3a5f]/50 bg-[#1e3a5f]/10 px-4 py-1.5 mb-4">
